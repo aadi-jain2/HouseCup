@@ -8,16 +8,20 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary-gold: #FFD700;
-            --secondary-gold: #FFA500;
-            --red-house: #7F0000;
-            --blue-house: #0E4B99;
-            --yellow-house: #FFD700;
-            --green-house: #2F5233;
-            --dark-bg: #0A0A0A;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-navy: #1a237e;
+            --secondary-navy: #283593;
+            --light-beige: #f5f5dc;
+            --cream-white: #fafafa;
+            --pure-white: #ffffff;
+            --red-house: #d32f2f;
+            --blue-house: #1976d2;
+            --yellow-house: #fbc02d;
+            --green-house: #388e3c;
+            --card-bg: rgba(245, 245, 220, 0.95);
+            --shadow: 0 20px 60px rgba(26, 35, 126, 0.2);
+            --gradient-bg: linear-gradient(135deg, #1a237e 0%, #283593 50%, #f5f5dc 100%);
+            --text-primary: #1a237e;
+            --text-secondary: #424242;
         }
 
         * {
@@ -32,6 +36,7 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            color: var(--text-primary);
         }
 
         /* Animated Background */
@@ -43,9 +48,9 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(26, 35, 126, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(245, 245, 220, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
             animation: backgroundShift 20s ease-in-out infinite;
             z-index: -1;
         }
@@ -66,9 +71,9 @@
         /* Header with Glassmorphism */
         .header {
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid var(--primary-navy);
             border-radius: 30px;
             padding: 40px;
             margin-bottom: 40px;
@@ -84,7 +89,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(26, 35, 126, 0.1), transparent);
             transform: rotate(45deg);
             animation: shimmer 3s infinite;
         }
@@ -95,12 +100,12 @@
         }
 
         .header h1 {
-            color: white;
+            color: var(--primary-navy);
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 15px;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+            text-shadow: 0 5px 15px rgba(26, 35, 126, 0.2);
+            background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy), var(--primary-navy));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -108,12 +113,12 @@
         }
 
         @keyframes titleGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); }
-            100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
+            0% { filter: drop-shadow(0 0 10px rgba(26, 35, 126, 0.3)); }
+            100% { filter: drop-shadow(0 0 20px rgba(26, 35, 126, 0.5)); }
         }
 
         .header p {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-secondary);
             font-size: 1.3rem;
             font-weight: 300;
             letter-spacing: 1px;
@@ -129,10 +134,10 @@
         }
 
         .nav button {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
+            border: 2px solid var(--primary-navy);
+            color: var(--primary-navy);
             padding: 18px 35px;
             border-radius: 25px;
             cursor: pointer;
@@ -151,7 +156,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(26, 35, 126, 0.1), transparent);
             transition: left 0.5s;
         }
 
@@ -161,23 +166,23 @@
 
         .nav button:hover {
             transform: translateY(-5px) scale(1.05);
-            background: rgba(255, 215, 0, 0.2);
-            border-color: var(--primary-gold);
-            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.3);
+            background: var(--light-beige);
+            border-color: var(--secondary-navy);
+            box-shadow: 0 15px 35px rgba(26, 35, 126, 0.2);
         }
 
         .nav button.active {
-            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold));
-            color: #000;
+            background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy));
+            color: var(--pure-white);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 10px 25px rgba(26, 35, 126, 0.3);
         }
 
         /* Horizontal Bar Chart Leaderboard */
         .leaderboard-container {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--primary-navy);
             border-radius: 25px;
             padding: 40px;
             margin-bottom: 40px;
@@ -189,7 +194,8 @@
             align-items: center;
             margin-bottom: 25px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--light-beige);
+            border: 1px solid var(--primary-navy);
             border-radius: 15px;
             transition: all 0.3s ease;
             position: relative;
@@ -198,8 +204,8 @@
 
         .house-bar:hover {
             transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: var(--cream-white);
+            box-shadow: 0 10px 30px rgba(26, 35, 126, 0.2);
         }
 
         .house-bar::before {
@@ -209,7 +215,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(26, 35, 126, 0.1), transparent);
             transform: translateX(-100%);
             transition: transform 0.6s;
         }
@@ -226,8 +232,8 @@
         }
 
         .house-rank {
-            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold));
-            color: #000;
+            background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy));
+            color: var(--pure-white);
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -237,12 +243,12 @@
             font-weight: 800;
             font-size: 1.2rem;
             margin-right: 20px;
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
         }
 
         .house-rank.first {
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+            background: linear-gradient(45deg, #fbc02d, #ffc107);
+            box-shadow: 0 5px 20px rgba(251, 192, 45, 0.5);
         }
 
         .house-rank.first::after {
@@ -260,14 +266,14 @@
         }
 
         .house-details {
-            color: white;
+            color: var(--text-primary);
         }
 
         .house-name {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 5px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 8px rgba(26, 35, 126, 0.2);
         }
 
         .house-students {
@@ -279,12 +285,13 @@
         .bar-container {
             flex: 1;
             height: 40px;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--cream-white);
+            border: 1px solid var(--primary-navy);
             border-radius: 20px;
             overflow: hidden;
             position: relative;
             margin: 0 20px;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 2px 10px rgba(26, 35, 126, 0.1);
         }
 
         .bar-fill {
@@ -330,10 +337,10 @@
         .bar-points {
             min-width: 120px;
             text-align: right;
-            color: white;
+            color: var(--text-primary);
             font-size: 1.4rem;
             font-weight: 800;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 2px 8px rgba(26, 35, 126, 0.2);
             z-index: 2;
         }
 
@@ -349,11 +356,11 @@
         }
 
         .points-guide h3 {
-            color: white;
+            color: var(--text-primary);
             font-size: 1.8rem;
             margin-bottom: 25px;
             text-align: center;
-            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 3px 10px rgba(26, 35, 126, 0.2);
         }
 
         .tier-grid {
@@ -364,9 +371,9 @@
         }
 
         .tier-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--light-beige);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--primary-navy);
             border-radius: 15px;
             padding: 20px;
             text-align: center;
@@ -382,13 +389,13 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
+            background: linear-gradient(90deg, var(--primary-navy), var(--secondary-navy));
         }
 
         .tier-card:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: var(--cream-white);
+            box-shadow: 0 15px 30px rgba(26, 35, 126, 0.2);
         }
 
         .tier-card.participation::before {
@@ -416,22 +423,22 @@
         }
 
         .tier-name {
-            color: white;
+            color: var(--text-primary);
             font-size: 1.1rem;
             font-weight: 700;
             margin-bottom: 8px;
         }
 
         .tier-points {
-            color: var(--primary-gold);
+            color: var(--primary-navy);
             font-size: 1.3rem;
             font-weight: 800;
             margin-bottom: 8px;
-            text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+            text-shadow: 0 2px 8px rgba(26, 35, 126, 0.2);
         }
 
         .tier-description {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.4;
         }
@@ -443,25 +450,25 @@
         }
 
         .category-section {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--light-beige);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--primary-navy);
             border-radius: 20px;
             padding: 25px;
             transition: all 0.3s ease;
         }
 
         .category-section:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--cream-white);
             transform: translateY(-3px);
         }
 
         .category-section h3 {
-            color: white;
+            color: var(--text-primary);
             font-size: 1.4rem;
             margin-bottom: 20px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            border-bottom: 2px solid var(--primary-gold);
+            text-shadow: 0 2px 8px rgba(26, 35, 126, 0.2);
+            border-bottom: 2px solid var(--primary-navy);
             padding-bottom: 10px;
         }
 
@@ -472,20 +479,20 @@
         }
 
         .example-item {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--cream-white);
             border-radius: 10px;
             padding: 12px;
             transition: all 0.3s ease;
-            border-left: 3px solid var(--primary-gold);
+            border-left: 3px solid var(--primary-navy);
         }
 
         .example-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--pure-white);
             transform: translateX(5px);
         }
 
         .example-level {
-            color: var(--primary-gold);
+            color: var(--primary-navy);
             font-weight: 700;
             font-size: 0.9rem;
             display: block;
@@ -493,16 +500,16 @@
         }
 
         .example-text {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--text-secondary);
             font-size: 0.9rem;
             line-height: 1.4;
         }
 
         /* Sections with Glassmorphism */
         .section {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid var(--primary-navy);
             border-radius: 25px;
             padding: 40px;
             margin-bottom: 40px;
@@ -519,7 +526,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
+            background: linear-gradient(90deg, var(--primary-navy), var(--secondary-navy));
         }
 
         .section.active {
@@ -539,12 +546,12 @@
         }
 
         .section h2 {
-            color: white;
+            color: var(--text-primary);
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 30px;
             text-align: center;
-            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 3px 10px rgba(26, 35, 126, 0.2);
         }
 
         /* Form Styling */
@@ -556,7 +563,7 @@
             display: block;
             margin-bottom: 10px;
             font-weight: 600;
-            color: white;
+            color: var(--text-primary);
             font-size: 1.1rem;
         }
 
@@ -565,33 +572,62 @@
         .form-group textarea {
             width: 100%;
             padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--light-beige);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid var(--primary-navy);
             border-radius: 15px;
             font-size: 1rem;
-            color: white;
+            color: var(--text-primary);
             transition: all 0.3s ease;
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-secondary);
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary-gold);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            border-color: var(--secondary-navy);
+            background: var(--cream-white);
+            box-shadow: 0 0 20px rgba(26, 35, 126, 0.2);
+        }
+
+        .file-help {
+            display: block;
+            margin-top: 5px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        input[type="file"] {
+            padding: 12px 15px !important;
+            cursor: pointer;
+        }
+
+        input[type="file"]::-webkit-file-upload-button {
+            background: var(--primary-navy);
+            color: var(--pure-white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]::-webkit-file-upload-button:hover {
+            background: var(--secondary-navy);
         }
 
         /* Buttons with Gradient Effects */
         .btn {
-            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold));
-            color: #000;
+            background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy));
+            color: var(--pure-white);
             border: none;
             padding: 18px 35px;
             border-radius: 25px;
@@ -613,7 +649,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -623,7 +659,7 @@
 
         .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(26, 35, 126, 0.3);
         }
 
         .btn:active {
@@ -632,13 +668,13 @@
 
         /* Student of the Week Card */
         .student-card {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.1));
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.1), rgba(245, 245, 220, 0.8));
             backdrop-filter: blur(20px);
-            border: 2px solid var(--primary-gold);
+            border: 2px solid var(--primary-navy);
             border-radius: 25px;
             padding: 40px;
             text-align: center;
-            color: white;
+            color: var(--text-primary);
             margin-bottom: 30px;
             position: relative;
             overflow: hidden;
@@ -646,15 +682,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+            0%, 100% { box-shadow: 0 0 20px rgba(26, 35, 126, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(26, 35, 126, 0.4); }
         }
 
         .student-name {
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 15px;
-            background: linear-gradient(45deg, var(--primary-gold), #FFFFFF);
+            background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -681,9 +717,9 @@
         }
 
         .activity-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--light-beige);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid var(--primary-navy);
             border-radius: 20px;
             padding: 25px;
             transition: all 0.3s ease;
@@ -698,25 +734,25 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
+            background: linear-gradient(90deg, var(--primary-navy), var(--secondary-navy));
         }
 
         .activity-card:hover {
             transform: translateY(-10px);
-            border-color: var(--primary-gold);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--secondary-navy);
+            box-shadow: 0 20px 40px rgba(26, 35, 126, 0.2);
         }
 
         .activity-name {
             font-size: 1.3rem;
             font-weight: 700;
-            color: white;
+            color: var(--text-primary);
             margin-bottom: 15px;
         }
 
         .activity-points {
-            background: linear-gradient(45deg, var(--primary-gold), var(--secondary-gold));
-            color: #000;
+            background: linear-gradient(45deg, var(--primary-navy), var(--secondary-navy));
+            color: var(--pure-white);
             padding: 8px 20px;
             border-radius: 25px;
             font-size: 1rem;
@@ -726,7 +762,7 @@
         }
 
         .activity-description {
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-secondary);
             line-height: 1.6;
             font-weight: 300;
         }
@@ -1033,6 +1069,12 @@
                     <textarea id="description" name="description" rows="4" placeholder="Describe your achievement in detail..." required></textarea>
                 </div>
                 
+                <div class="form-group">
+                    <label for="proofFile"><i class="fas fa-upload"></i> Upload Proof (Optional)</label>
+                    <input type="file" id="proofFile" name="proofFile" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.txt" onchange="validateFileSize(this)">
+                    <small class="file-help">Supported formats: PDF, JPG, PNG, DOC, DOCX, TXT (Max size: 5MB)</small>
+                </div>
+                
                 <button type="submit" class="btn">
                     <i class="fas fa-paper-plane"></i> Submit Activity
                 </button>
@@ -1265,6 +1307,19 @@
             }
         }
 
+        // Function to validate file size
+        function validateFileSize(input) {
+            const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+            const file = input.files[0];
+            
+            if (file && file.size > maxSize) {
+                showMessage('File size must be less than 5MB. Please choose a smaller file.', 'error');
+                input.value = ''; // Clear the file input
+                return false;
+            }
+            return true;
+        }
+
         // Enhanced navigation with animations
         function showSection(sectionId) {
             // Hide all sections with fade out
@@ -1336,6 +1391,22 @@
                 return;
             }
             
+            // Handle file upload
+            const proofFile = document.getElementById('proofFile').files[0];
+            let proofFileName = '';
+            let proofFileSize = 0;
+            
+            if (proofFile) {
+                proofFileName = proofFile.name;
+                proofFileSize = proofFile.size;
+                
+                // Validate file size again (double check)
+                if (proofFileSize > 5 * 1024 * 1024) {
+                    showMessage('File size must be less than 5MB. Please choose a smaller file.', 'error');
+                    return;
+                }
+            }
+            
             // Add to submissions with timestamp and detailed info
             submissions.push({
                 ...data,
@@ -1343,7 +1414,10 @@
                 date: new Date().toISOString(),
                 id: Date.now(),
                 achievementLevel: data.achievement,
-                category: data.category
+                category: data.category,
+                proofFile: proofFileName,
+                proofFileSize: proofFileSize,
+                hasProof: proofFileName !== ''
             });
             
             // Update house points with animation
@@ -1365,7 +1439,8 @@
                 'Special': '⭐'
             };
             
-            showMessage(`🎉 ${categoryEmoji[data.category]} ${data.category} activity submitted! You earned ${points} points for ${data.house}!`, 'success');
+            const proofMessage = proofFileName ? ` with proof document (${proofFileName})` : '';
+            showMessage(`🎉 ${categoryEmoji[data.category]} ${data.category} activity submitted${proofMessage}! You earned ${points} points for ${data.house}!`, 'success');
             
             // Add celebration effect
             createCelebrationEffect();
@@ -1384,8 +1459,8 @@
             
             if (pointsElement) {
                 pointsElement.style.transform = 'scale(1.3)';
-                pointsElement.style.color = '#FFD700';
-                pointsElement.style.textShadow = '0 0 15px rgba(255, 215, 0, 0.8)';
+                pointsElement.style.color = '#1a237e';
+                pointsElement.style.textShadow = '0 0 15px rgba(26, 35, 126, 0.8)';
                 
                 setTimeout(() => {
                     pointsElement.style.transform = 'scale(1)';
@@ -1396,7 +1471,7 @@
             
             if (barFillElement) {
                 barFillElement.style.transform = 'scaleY(1.2)';
-                barFillElement.style.boxShadow = '0 0 25px rgba(255, 215, 0, 0.8)';
+                barFillElement.style.boxShadow = '0 0 25px rgba(26, 35, 126, 0.6)';
                 
                 setTimeout(() => {
                     barFillElement.style.transform = 'scaleY(1)';
@@ -1406,7 +1481,7 @@
             
             if (rankElement) {
                 rankElement.style.transform = 'scale(1.3) rotate(360deg)';
-                rankElement.style.background = 'linear-gradient(45deg, #FFD700, #FFA500)';
+                rankElement.style.background = 'linear-gradient(45deg, #1a237e, #283593)';
                 
                 setTimeout(() => {
                     rankElement.style.transform = 'scale(1) rotate(0deg)';
@@ -1489,7 +1564,7 @@
                 if (index === 0) {
                     const barFill = document.getElementById(houseId + '-bar-fill');
                     if (barFill) {
-                        barFill.style.boxShadow = '0 0 20px rgba(255, 215, 0, 0.6)';
+                        barFill.style.boxShadow = '0 0 20px rgba(26, 35, 126, 0.4)';
                     }
                 } else {
                     const barFill = document.getElementById(houseId + '-bar-fill');
