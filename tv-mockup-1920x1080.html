@@ -1,0 +1,686 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Cup Leaderboard - Grand Tournament</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --gold: #FFFFFF;
+            --gold-light: #F0F0F0;
+            --cream: #F8F6F0;
+            --dark-bg: #0F172A;
+            --navy: #0F172A;
+            --navy-light: #1E293B;
+            --house-red: #C41E3A;
+            --house-blue: #1E40AF;
+            --house-yellow: #F59E0B;
+            --house-green: #059669;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.95) 0%, rgba(10, 15, 20, 0.98) 100%);
+            color: var(--cream);
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            width: 100%;
+            height: 100%;
+            padding: 20px 40px 40px;
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            grid-template-rows: 160px 1fr;
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* ============================================
+           DARK BANNER HEADER
+           ============================================ */
+        .header {
+            grid-column: 1 / -1;
+            background: var(--navy);
+            border: 3px solid var(--gold);
+            border-radius: 8px;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3), 0 10px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            min-height: 140px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            position: absolute;
+            left: 40px;
+        }
+        
+        .header-right {
+            position: absolute;
+            right: 30px;
+        }
+        
+        .school-logo {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
+            object-fit: contain;
+        }
+        
+        .header-title {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .title-main {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--gold);
+            letter-spacing: 4px;
+            line-height: 1;
+        }
+        
+        .title-sub {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 26px;
+            color: var(--gold);
+            letter-spacing: 3px;
+            font-weight: 500;
+        }
+        
+        .mode-indicator {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: var(--gold);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        /* ============================================
+           HOUSE TOWERS - VERTICAL PANELS
+           ============================================ */
+        .leaderboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            align-items: end;
+            background: url('house-cup-assets/backgrounds/background.jpg') center/cover no-repeat;
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .leaderboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            z-index: 0;
+        }
+        
+        .house-tower {
+            background: rgba(15, 23, 42, 0.7);
+            border: 3px solid var(--gold);
+            border-radius: 12px;
+            padding: 25px 20px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 10px 30px rgba(0, 0, 0, 0.5);
+            min-height: 750px;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(2px);
+        }
+        
+        .house-rank {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 72px;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .house-emblem {
+            width: 140px;
+            height: 140px;
+            background: var(--cream);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--gold);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            padding: 10px;
+        }
+        
+        .house-emblem img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .house-name {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cream);
+            text-align: center;
+            line-height: 1.3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* ============================================
+           VERTICAL STRIPED BARS - BALANCED TRANSPARENCY
+           ============================================ */
+        .house-bar-container {
+            position: relative;
+            width: 80px;
+            height: 350px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 40px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            margin: 15px 0;
+        }
+        
+        .house-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            border-radius: 40px 40px 0 0;
+            transition: height 1s ease-out;
+            opacity: 0.85;
+        }
+        
+        .house-bar.red { 
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(239, 68, 68, 1),
+                rgba(239, 68, 68, 1) 10px,
+                rgba(220, 38, 38, 1) 10px,
+                rgba(220, 38, 38, 1) 20px
+            );
+        }
+        
+        .house-bar.blue { 
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(30, 64, 175, 1),
+                rgba(30, 64, 175, 1) 10px,
+                rgba(15, 23, 42, 1) 10px,
+                rgba(15, 23, 42, 1) 20px
+            );
+        }
+        
+        .house-bar.yellow { 
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(253, 224, 71, 1),
+                rgba(253, 224, 71, 1) 10px,
+                rgba(251, 191, 36, 1) 10px,
+                rgba(251, 191, 36, 1) 20px
+            );
+        }
+        
+        .house-bar.green { 
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(34, 197, 94, 1),
+                rgba(34, 197, 94, 1) 10px,
+                rgba(16, 185, 129, 1) 10px,
+                rgba(16, 185, 129, 1) 20px
+            );
+        }
+        
+        .house-points {
+            font-family: 'Cinzel', serif;
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--gold);
+            text-align: center;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        
+        .house-name {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gold);
+            text-align: center;
+            line-height: 1.3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* ============================================
+           STUDENT SPOTLIGHT
+           ============================================ */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .spotlight-keep {
+            background: rgba(15, 23, 42, 0.7);
+            border: 3px solid var(--gold);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), 0 10px 30px rgba(0, 0, 0, 0.5);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(2px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spotlight-keep::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .spotlight-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 36px;
+            color: var(--gold);
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .spotlight-content {
+            font-size: 20px;
+            color: var(--gold);
+            line-height: 1.8;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .spotlight-photo {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 6px solid var(--gold);
+            margin: 0 auto 35px;
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.6), 0 20px 60px rgba(0, 0, 0, 0.7);
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .spotlight-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .spotlight-photo::after {
+            content: '📷';
+            position: absolute;
+            font-size: 80px;
+            opacity: 0.3;
+        }
+        
+        .spotlight-photo:has(img)::after {
+            display: none;
+        }
+        
+        .spotlight-student {
+            font-weight: 800;
+            color: var(--gold);
+            font-size: 32px;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .spotlight-house {
+            font-size: 22px;
+            color: var(--gold);
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-align: center;
+            opacity: 0.9;
+        }
+        
+        .spotlight-achievement {
+            font-size: 20px;
+            line-height: 1.9;
+            color: var(--gold);
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* ============================================
+           MODE TOGGLE
+           ============================================ */
+        .mode-toggle {
+            position: fixed;
+            top: 30px;
+            right: 50px;
+            background: transparent;
+            border: none;
+            z-index: 1000;
+            font-size: 18px;
+            color: var(--gold);
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .mode-toggle:hover {
+            color: var(--gold-light);
+        }
+        
+        @keyframes towerRise {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .house-tower {
+            animation: towerRise 0.6s ease-out backwards;
+        }
+        
+        .house-tower:nth-child(1) { animation-delay: 0.1s; }
+        .house-tower:nth-child(2) { animation-delay: 0.2s; }
+        .house-tower:nth-child(3) { animation-delay: 0.3s; }
+        .house-tower:nth-child(4) { animation-delay: 0.4s; }
+        
+        @media (max-width: 1920px) {
+            body {
+                transform: scale(0.5);
+                transform-origin: top left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <img src="house-cup-assets/school-logo.png" alt="Jayshree Periwal International School" class="school-logo" 
+                     onerror="this.src='house-cup-assets/school-logo.jpg'; this.onerror=function(){this.style.display='none';}">
+            </div>
+            <div class="header-title">
+                <div class="title-main">GRAND TOURNAMENT</div>
+                <div class="title-sub">HOUSE CUP LEADERBOARD</div>
+            </div>
+            <div class="header-right">
+                <div class="mode-indicator">MODE: <span id="mode-indicator-text">DEMO</span></div>
+                <a href="activity-submission-form.html" style="display: block; margin-top: 10px; color: var(--gold); text-decoration: none; font-size: 14px; font-weight: 600; padding: 8px 15px; border: 2px solid var(--gold); border-radius: 6px; transition: all 0.3s ease;">Submit Activity</a>
+            </div>
+        </header>
+        
+        <main class="leaderboard" id="leaderboard">
+            <!-- Houses will be dynamically inserted here -->
+        </main>
+        
+        <aside class="sidebar">
+            <div class="spotlight-keep">
+                <h2 class="spotlight-title">Student Spotlight</h2>
+                <div class="spotlight-content" id="spotlight-content">
+                    <!-- Spotlight content will be dynamically inserted -->
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        let currentMode = 'demo';
+        const GOOGLE_SHEET_ID = '<SHEET_ID>';
+        const GOOGLE_SHEET_URL = `https://spreadsheets.google.com/feeds/list/${GOOGLE_SHEET_ID}/od6/public/values?alt=json`;
+        
+        const DEMO_DATA = {
+            houses: [
+                {
+                    name: "Red Shakespearean Bulls",
+                    shortName: "Bulls",
+                    color: "red",
+                    points: 1250,
+                    rank: 1,
+                    studentCount: 45
+                },
+                {
+                    name: "Blue Newton Wolves",
+                    shortName: "Wolves",
+                    color: "blue",
+                    points: 1180,
+                    rank: 2,
+                    studentCount: 42
+                },
+                {
+                    name: "Yellow Mozart Stags",
+                    shortName: "Stags",
+                    color: "yellow",
+                    points: 1100,
+                    rank: 3,
+                    studentCount: 40
+                },
+                {
+                    name: "Green Aristotle Panthers",
+                    shortName: "Panthers",
+                    color: "green",
+                    points: 980,
+                    rank: 4,
+                    studentCount: 38
+                }
+            ],
+            spotlight: {
+                student: "Alexandra Chen",
+                house: "Red Shakespearean Bulls",
+                achievement: "Led the winning debate team in the inter-house championship, demonstrating exceptional leadership, eloquence, and strategic thinking that inspired her entire house to victory."
+            }
+        };
+        
+        async function fetchData() {
+            if (currentMode === 'demo') {
+                await new Promise(resolve => setTimeout(resolve, 300));
+                return DEMO_DATA;
+            } else {
+                try {
+                    const response = await fetch(GOOGLE_SHEET_URL);
+                    const data = await response.json();
+                    return parseGoogleSheetsData(data);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    alert('Failed to fetch live data. Falling back to demo mode.');
+                    currentMode = 'demo';
+                    return DEMO_DATA;
+                }
+            }
+        }
+        
+        function parseGoogleSheetsData(sheetsData) {
+            const entries = sheetsData.feed.entry || [];
+            const houses = [];
+            
+            for (let i = 1; i < entries.length; i++) {
+                const entry = entries[i];
+                houses.push({
+                    name: entry.gsx$housename?.$t || '',
+                    shortName: entry.gsx$shortname?.$t || '',
+                    color: entry.gsx$color?.$t || 'red',
+                    points: parseInt(entry.gsx$points?.$t || '0', 10),
+                    rank: parseInt(entry.gsx$rank?.$t || '1', 10),
+                    studentCount: parseInt(entry.gsx$studentcount?.$t || '0', 10)
+                });
+            }
+            
+            houses.sort((a, b) => a.rank - b.rank);
+            
+            return {
+                houses: houses,
+                spotlight: {
+                    student: entry.gsx$spotlightstudent?.$t || 'Outstanding Student',
+                    house: houses[0]?.name || '',
+                    achievement: entry.gsx$spotlightachievement?.$t || 'Excellence in academics'
+                }
+            };
+        }
+        
+        function renderLeaderboard(data) {
+            const leaderboardEl = document.getElementById('leaderboard');
+            leaderboardEl.innerHTML = '';
+            
+            const maxPoints = Math.max(...data.houses.map(h => h.points));
+            
+            data.houses.forEach((house, index) => {
+                const percentage = (house.points / maxPoints) * 100;
+                
+                const houseTower = document.createElement('div');
+                houseTower.className = 'house-tower';
+                houseTower.style.animationDelay = `${index * 0.1}s`;
+                houseTower.innerHTML = `
+                    <div class="house-rank">${house.rank}</div>
+                    <div class="house-emblem">
+                        <img src="house-cup-assets/house-logos/${house.color}_${house.shortName.toLowerCase()}.png" 
+                             alt="${house.shortName} Emblem" 
+                             onerror="this.src='house-cup-assets/house-logos/${house.color}_${house.shortName.toLowerCase()}.jpg'; this.onerror=function(){this.style.display='none';}">
+                    </div>
+                    <div class="house-name">${house.name}</div>
+                    <div class="house-bar-container">
+                        <div class="house-bar ${house.color}" style="height: 0%"></div>
+                    </div>
+                    <div class="house-points">${house.points.toLocaleString()}</div>
+                `;
+                
+                leaderboardEl.appendChild(houseTower);
+                
+                setTimeout(() => {
+                    const bar = houseTower.querySelector('.house-bar');
+                    if (bar) {
+                        bar.style.height = `${percentage}%`;
+                    }
+                }, 400 + (index * 150));
+            });
+        }
+        
+        function renderSpotlight(data) {
+            const spotlightEl = document.getElementById('spotlight-content');
+            spotlightEl.innerHTML = `
+                <div class="spotlight-photo">
+                    <img src="house-cup-assets/spotlight/${data.spotlight.student.toLowerCase().replace(/\s+/g, '_')}.jpg" 
+                         alt="${data.spotlight.student}" 
+                         onerror="this.style.display='none';">
+                </div>
+                <div class="spotlight-student">${data.spotlight.student.toUpperCase()}</div>
+                <div class="spotlight-house">from ${data.spotlight.house}</div>
+                <div class="spotlight-achievement">${data.spotlight.achievement}</div>
+            `;
+        }
+        
+        function render(data) {
+            renderLeaderboard(data);
+            renderSpotlight(data);
+        }
+        
+        function toggleMode() {
+            currentMode = currentMode === 'demo' ? 'live' : 'demo';
+            const indicator = document.getElementById('mode-indicator-text');
+            if (indicator) {
+                indicator.textContent = currentMode.toUpperCase();
+            }
+            loadData();
+        }
+        
+        // Make header clickable to toggle mode
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.cursor = 'pointer';
+                header.addEventListener('click', toggleMode);
+            }
+        });
+        
+        async function loadData() {
+            const data = await fetchData();
+            render(data);
+        }
+        
+        loadData();
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>

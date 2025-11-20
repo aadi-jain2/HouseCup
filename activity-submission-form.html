@@ -1,0 +1,425 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Submission Form - House Cup Points</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --navy: #0F172A;
+            --white: #FFFFFF;
+            --gold: #FFFFFF;
+            --cream: #F8F6F0;
+            --success: #10B981;
+            --error: #EF4444;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, rgba(15, 20, 25, 0.95) 0%, rgba(10, 15, 20, 0.98) 100%);
+            color: var(--white);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(15, 23, 42, 0.9);
+            border: 3px solid var(--gold);
+            border-radius: 16px;
+            padding: 50px;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.2), 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .header p {
+            font-size: 18px;
+            color: var(--cream);
+            opacity: 0.9;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid var(--gold);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-5px);
+        }
+        .form-group {
+            margin-bottom: 30px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+        .form-group label .required {
+            color: var(--error);
+            margin-left: 4px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .file-upload-wrapper {
+            position: relative;
+        }
+        .file-upload-label {
+            display: block;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .file-upload-label:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--gold);
+        }
+        .file-upload-label input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--cream);
+            opacity: 0.8;
+        }
+        .points-preview {
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid var(--success);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .points-preview.hidden {
+            display: none;
+        }
+        .points-preview .points-label {
+            font-size: 14px;
+            color: var(--cream);
+            margin-bottom: 8px;
+        }
+        .points-preview .points-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--success);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+            border: 3px solid var(--gold);
+            border-radius: 8px;
+            color: var(--gold);
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .submit-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .success-message {
+            display: none;
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px solid var(--success);
+            border-radius: 8px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .success-message.show {
+            display: block;
+        }
+        .success-message h2 {
+            color: var(--success);
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .success-message p {
+            color: var(--cream);
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .error-message {
+            display: none;
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid var(--error);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: var(--error);
+            font-size: 14px;
+        }
+        .error-message.show {
+            display: block;
+        }
+        .form-help {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="tv-mockup-1920x1080.html" class="back-link">â† Back to Leaderboard</a>
+        
+        <div class="header">
+            <h1>Activity Submission Form</h1>
+            <p>Submit your extracurricular activities to earn House Cup points</p>
+        </div>
+        
+        <div class="error-message" id="error-message"></div>
+        
+        <form id="activity-form">
+            <div class="points-preview hidden" id="points-preview">
+                <div class="points-label">Estimated Points</div>
+                <div class="points-value" id="points-value">0</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="category">Activity Category <span class="required">*</span></label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="academic">Academic</option>
+                    <option value="sports">Sports</option>
+                    <option value="arts">Arts & Creative</option>
+                    <option value="leadership">Leadership & Community Service</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Activity Description <span class="required">*</span></label>
+                <input type="text" id="description" name="description" placeholder="e.g., Debate Team Competition" required>
+                <div class="form-help">Brief name or description of the activity</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="tier">Achievement Tier <span class="required">*</span></label>
+                <select id="tier" name="tier" required>
+                    <option value="">Select achievement level</option>
+                    <option value="participation">Participation</option>
+                    <option value="school">School Level</option>
+                    <option value="regional">Regional/State Level</option>
+                    <option value="national">National Level</option>
+                    <option value="award">National Award</option>
+                    <option value="special">Special Mention</option>
+                </select>
+                <div class="form-help">Select the highest level of achievement for this activity</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="hours">Hours Committed</label>
+                <input type="number" id="hours" name="hours" placeholder="e.g., 20" min="0" step="0.5">
+                <div class="form-help">Number of hours spent on this activity (optional but encouraged)</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Date/Time Period <span class="required">*</span></label>
+                <input type="text" id="date" name="date" placeholder="e.g., October 2024 or 10/15/2024" required>
+                <div class="form-help">When the activity was undertaken</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="proof">Proof Submission</label>
+                <div class="file-upload-wrapper">
+                    <label class="file-upload-label" for="proof">
+                        <div>ðŸ“Ž Click to upload files</div>
+                        <div style="font-size: 12px; margin-top: 5px; opacity: 0.7;">JPG, PNG, PDF, DOCX (optional)</div>
+                        <input type="file" id="proof" name="proof" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx" multiple>
+                    </label>
+                    <div class="file-name" id="file-names"></div>
+                </div>
+                <div class="form-help">Upload certificates, photos, or documents as proof (optional but encouraged)</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">Additional Notes</label>
+                <textarea id="notes" name="notes" placeholder="Any extra details, context, or explanation..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submit-btn">Submit Activity</button>
+        </form>
+        
+        <div class="success-message" id="success-message">
+            <h2>âœ“ Activity Submitted Successfully!</h2>
+            <p><strong id="success-points">0 points</strong> have been assigned.</p>
+            <p style="margin-top: 20px;">
+                <a href="tv-mockup-1920x1080.html" class="back-link" style="display: inline-block; margin-top: 15px;">View Leaderboard</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const POINTS_MAP = {
+            'participation': { base: 2, range: [1, 3] },
+            'school': { base: 5 },
+            'regional': { base: 10 },
+            'national': { base: 20 },
+            'award': { base: 30 },
+            'special': { base: 25 }
+        };
+        
+        function calculatePoints(tier, hours) {
+            if (!tier || !POINTS_MAP[tier]) return 0;
+            
+            const tierData = POINTS_MAP[tier];
+            let points = tierData.base || tierData.range[1] || 0;
+            
+            if (hours && hours > 0) {
+                const hoursBonus = Math.min((hours / 10) * 0.5, 5);
+                points += hoursBonus;
+            }
+            
+            if (tier === 'participation' && tierData.range) {
+                points = Math.floor(Math.random() * (tierData.range[1] - tierData.range[0] + 1)) + tierData.range[0];
+            }
+            
+            return Math.round(points * 10) / 10;
+        }
+        
+        function updatePointsPreview() {
+            const tier = document.getElementById('tier').value;
+            const hours = parseFloat(document.getElementById('hours').value) || 0;
+            const points = calculatePoints(tier, hours);
+            
+            const preview = document.getElementById('points-preview');
+            const pointsValue = document.getElementById('points-value');
+            
+            if (tier && points > 0) {
+                preview.classList.remove('hidden');
+                pointsValue.textContent = points + ' pts';
+            } else {
+                preview.classList.add('hidden');
+            }
+        }
+        
+        document.getElementById('proof').addEventListener('change', function(e) {
+            const files = e.target.files;
+            const fileNamesDiv = document.getElementById('file-names');
+            
+            if (files.length > 0) {
+                const names = Array.from(files).map(f => f.name).join(', ');
+                fileNamesDiv.textContent = `Selected: ${files.length} file(s) - ${names.substring(0, 60)}${names.length > 60 ? '...' : ''}`;
+            } else {
+                fileNamesDiv.textContent = '';
+            }
+        });
+        
+        document.getElementById('tier').addEventListener('change', updatePointsPreview);
+        document.getElementById('hours').addEventListener('input', updatePointsPreview);
+        
+        document.getElementById('activity-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const errorMsg = document.getElementById('error-message');
+            const successMsg = document.getElementById('success-message');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            errorMsg.classList.remove('show');
+            successMsg.classList.remove('show');
+            
+            const formData = new FormData(this);
+            const tier = formData.get('tier');
+            const hours = parseFloat(formData.get('hours')) || 0;
+            const points = calculatePoints(tier, hours);
+            
+            if (!tier) {
+                errorMsg.textContent = 'Please select an achievement tier.';
+                errorMsg.classList.add('show');
+                return;
+            }
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            setTimeout(() => {
+                document.getElementById('success-points').textContent = points + ' points';
+                successMsg.classList.add('show');
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                this.reset();
+                document.getElementById('file-names').textContent = '';
+                document.getElementById('points-preview').classList.add('hidden');
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Activity';
+                
+                console.log('Activity submitted:', {
+                    category: formData.get('category'),
+                    description: formData.get('description'),
+                    tier: tier,
+                    hours: hours,
+                    points: points,
+                    date: formData.get('date'),
+                    notes: formData.get('notes'),
+                    files: formData.getAll('proof').length
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
